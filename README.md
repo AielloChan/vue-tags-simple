@@ -1,5 +1,15 @@
 # Vue-Tags
 
+```bash
+git clone https://github.com/AielloChan/vue-tags.git
+cd vue-tags
+npm install
+npm run dev
+# Have fun !!
+```
+
+![Preview.gif](preview.gif)
+
 ## 食用指导
 
 通过一个简单的 **5** 步教学，让你了解本控件所有功能！
