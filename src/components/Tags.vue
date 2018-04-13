@@ -35,37 +35,37 @@ export default {
   name: "Vue-Tags",
   props: {
     /* Datas */
+    // 正在使用的标签所对应的 id 数组，如: [2, 3, 6]
     UsedTagIds: {
-      describ: '正在使用的标签所对应的 id 数组，如: [2, 3, 6]',
       type: Array,
       default() {
         return [];
       }
     },
+    // 所有的标签项目数组，如: {1: {name: "Github", color: "#213123"}}
     AllTags: {
-      describ: '所有的标签项目数组，如: {1: {name: "Github", color: "#213123"}}',
       type: Object,
       default() {
         return {};
       }
     },
+    // 全局 id 指示器，新增的标签 id 就会使用这个值并且将其自增 1
     NextTagId: {
-      describ: '全局 id 指示器，新增的标签 id 就会使用这个值并且将其自增 1',
       type: Number,
       default: null
     },
+    // 输入框的占位提示文字
     Placeholder: {
-      describ: '输入框的占位提示文字',
       type: String,
       default: '请输入标签名'
     },
+    // 在输入框中自动补全，会多消耗一丢丢性能
     AutoComplite: {
-      describ: '在输入框中自动补全，会多消耗一丢丢性能',
       type: Boolean | String,
       default: false
     },
+    // 允许通过粘贴直接添加标签
     AllowPasteToAdd: {
-      describ: '允许通过粘贴直接添加标签',
       type: Boolean | String,
       default: true
     },
@@ -80,51 +80,50 @@ export default {
     *   globalNextId:10
     * }
     */
-    // TODO:
+    // 在添加标签前调用。返回：标准数据、新被加入标签的 ID、将被加入的标签名
     BeforeAddTag: {
-      describ: '在添加标签前调用。返回：标准数据、新被加入标签的 ID、将被加入的标签名',
       type: Function,
       default: function () { }
     },
+    // 在添加标签后调用。返回：标准数据、新被加入标签的 ID
     AfterAddTag: {
-      describ: '在添加标签后调用。返回：标准数据、新被加入标签的 ID',
       type: Function,
       default: function () { }
     },
+    // 在使用标签前调用。返回：标准数据、将被使用的标签 ID
     BeforeUseTag: {
-      describ: '在使用标签前调用。返回：标准数据、将被使用的标签 ID',
       type: Function,
       default: function () { }
     },
+    // 在使用标签后调用。返回：标准数据、已被使用的标签 ID
     AfterUseTag: {
-      describ: '在使用标签后调用。返回：标准数据、已被使用的标签 ID',
       type: Function,
       default: function () { }
     },
+    // 在删除标签前调用。返回：标准数据、将被删除的标签 ID
     BeforeDeleteTag: {
-      describ: '在删除标签前调用。返回：标准数据、将被删除的标签 ID',
       type: Function,
       default: function () { }
     },
+    // 在删除标签后调用。返回：标准数据
     AfterDeleteTag: {
-      describ: '在删除标签后调用。返回：标准数据',
       type: Function,
       default: function () { }
     },
+    // 在更新标签前调用。返回：标准数据、将被修改的标签 ID、新标签名
     BeforeUpdateTagName: {
-      describ: '在更新标签前调用。返回：标准数据、将被修改的标签 ID、新标签名',
       type: Function,
       default: function () { }
     },
+    // 在更新标签后调用。返回：标准数据、已被修改的标签 ID、新标签名
     AfterUpdateTagName: {
-      describ: '在更新标签后调用。返回：标准数据、已被修改的标签 ID、新标签名',
       type: Function,
       default: function () { }
     },
 
     /* Styles */
+    // 标签输入框中输入超过设定值数量的字符，输入字体颜色将改变
     WarningLength: {
-      describ: '标签输入框中输入超过设定值数量的字符，输入字体颜色将改变',
       type: Number,
       default: 18
     }
@@ -417,7 +416,7 @@ export default {
         // 更新钩子
         this.BeforeUpdateTagName(this.cbParam, id, name);
         this.allTags[id].name = name;
-        this.AfterUpdateTagName(this.cbParam, id, name);        
+        this.AfterUpdateTagName(this.cbParam, id, name);
         return true;
       }
       return false;
