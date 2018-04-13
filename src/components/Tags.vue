@@ -80,43 +80,44 @@ export default {
     *   globalNextId:10
     * }
     */
+    // TODO:
     BeforeAddTag: {
-      describ: '在添加标签前的钩子函数，将会返回即将被加入的标签',
+      describ: '在添加标签前调用。返回：标准数据、新被加入标签的 ID、将被加入的标签名',
       type: Function,
       default: function () { }
     },
     AfterAddTag: {
-      describ: '在添加标签后的钩子函数，将会返回所有的标签',
+      describ: '在添加标签后调用。返回：标准数据、新被加入标签的 ID',
       type: Function,
       default: function () { }
     },
     BeforeUseTag: {
-      describ: '',
+      describ: '在使用标签前调用。返回：标准数据、将被使用的标签 ID',
       type: Function,
       default: function () { }
     },
     AfterUseTag: {
-      describ: '',
+      describ: '在使用标签后调用。返回：标准数据、已被使用的标签 ID',
       type: Function,
       default: function () { }
     },
     BeforeDeleteTag: {
-      describ: '',
+      describ: '在删除标签前调用。返回：标准数据、将被删除的标签 ID',
       type: Function,
       default: function () { }
     },
     AfterDeleteTag: {
-      describ: '',
+      describ: '在删除标签后调用。返回：标准数据',
       type: Function,
       default: function () { }
     },
     BeforeUpdateTagName: {
-      describ: '',
+      describ: '在更新标签前调用。返回：标准数据、将被修改的标签 ID、新标签名',
       type: Function,
       default: function () { }
     },
     AfterUpdateTagName: {
-      describ: '',
+      describ: '在更新标签后调用。返回：标准数据、已被修改的标签 ID、新标签名',
       type: Function,
       default: function () { }
     },
@@ -172,7 +173,7 @@ export default {
       }
       return '';
     },
-    // 回调函数的参数
+    // 标准数据
     cbParam() {
       return {
         allTags: this.allTags,
@@ -295,8 +296,10 @@ export default {
           name: name
         }),
           newTagId = this.getNextId();
+        this.BeforeAddTag(this.cbParam, newTagId, name);
         // 添加到标签列表中
         this.allTags[newTagId] = newTag;
+        this.AfterAddTag(this.cbParam, newTagId, name);
         this.useTag(newTagId);
       } else if (this.usedTagIds.indexOf(existedTagId) === -1) {
         // 已经存在此名字的标签，但是当前并没有使用
@@ -319,16 +322,24 @@ export default {
       return true;
     },
     useTag(id) {
+      this.BeforeUseTag(this.cbParam, id);
       // 直接添加到当前使用列表中
       this.usedTagIds.push(id);
+      this.AfterUseTag(this.cbParam, id);
     },
     // 移除指定标签
     delTag(id) {
+      this.BeforeDeleteTag(this.cbParam, id);
       this.usedTagIds = this.rmMatch(this.usedTagIds, _id => _id !== id);
+      this.AfterDeleteTag(this.cbParam, id);
     },
     // 从使用中的标签里移除最后一个
     delLastTag() {
+      let usedTagIds = this.usedTagIds,
+        tobeRemovedTagId = usedTagIds[usedTagIds.length - 1];
+      this.BeforeDeleteTag(this.cbParam, tobeRemovedTagId);
       this.usedTagIds = this.rmLast(this.usedTagIds);
+      this.AfterDeleteTag(this.cbParam, tobeRemovedTagId);
     },
     inputWarning() {
       // 输入超过指定长度给予提醒
@@ -403,7 +414,10 @@ export default {
     // 通过 id 来直接修改对应标签的显示名字,用于更新大小写
     setTagNameById(id, name) {
       if (this.allTags[id] && name.length > 0) {
+        // 更新钩子
+        this.BeforeUpdateTagName(this.cbParam, id, name);
         this.allTags[id].name = name;
+        this.AfterUpdateTagName(this.cbParam, id, name);        
         return true;
       }
       return false;
