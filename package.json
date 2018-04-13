@@ -5,6 +5,11 @@
   "author": "Aiello Chan <Aiello.Chan@Gmail.com>",
   "license": "Apache",
   "private": false,
+  "main": "dist/vue-tags.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AielloChan/vue-tags.git"
+  },
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js --open --hot",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js --progress --hide-modules"
