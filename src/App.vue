@@ -6,6 +6,8 @@
     <div class="container vue-tags">
       <Tags :AllTags="allTags"
         :UsedTagIds="usedTagIds"
+        :BeforeAddTag="beforeAddTag"
+        :AfterAddTag="afterAddTag"
         AutoComplite='true'></Tags>
     </div>
     <div class="container info">
@@ -70,6 +72,14 @@ export default {
   },
   components: {
     Tags
+  },
+  methods: {
+    beforeAddTag(data, id, name) {
+      console.log(`即将添加 id 为 ${id} 的标签：${name}`);
+    },
+    afterAddTag(data, id, name) {
+      console.log(`成功添加 ${name}，当前使用的标签有 ${data.usedTagIds.join(',')}`);
+    }
   }
 }
 </script>
