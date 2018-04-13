@@ -8,7 +8,7 @@
   "main": "dist/vue-tags.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AielloChan/vue-tags.git"
+    "url": "https://github.com/AielloChan/vue-tags-simple.git"
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js --open --hot",
