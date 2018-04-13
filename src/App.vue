@@ -18,7 +18,7 @@
       <h4>2. 删除标签</h4>
       <p>那个名为
         <mark>Mini</mark> 的标签我也不知道是干嘛的，通过点击该标签右侧的
-        <red>✕</red> 来将其移除。 </p>
+        <span style="color:red;">✕</span> 来将其移除。 </p>
       <p>当前我们的输入框什么都没有，请在输入框中点击一下，让它获得焦点。然后我觉得这个
         <mark>Google</mark> 也没什么用，按下
         <strong>Backspace</strong> 来删除最后一个元素。</p>
