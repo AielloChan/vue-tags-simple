@@ -1,7 +1,7 @@
 {
   "name": "vue-tags-simple",
   "description": "A tags component build with vue.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Aiello Chan <Aiello.Chan@Gmail.com>",
   "license": "Apache",
   "private": false,
