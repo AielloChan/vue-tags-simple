@@ -7,7 +7,8 @@
         @click.stop="onClickTag(tagId)"
         class="used-tag">
         <span>{{getTagNameById(tagId)}}</span>
-        <span @click="delTag(tagId)"
+        <span v-if="!HideDelete"
+          @click="delTag(tagId)"
           class="used-tag-remove">✕</span>
       </div>
       <span class="new-tag-wapper"
@@ -75,6 +76,11 @@ export default {
     },
     // 隐藏标签输入框
     HideInput: {
+      type: Boolean | String,
+      default: false
+    },
+    // 隐藏删除按钮（标签右侧的 x）
+    HideDelete: {
       type: Boolean | String,
       default: false
     },

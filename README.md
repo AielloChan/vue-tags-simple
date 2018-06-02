@@ -102,6 +102,16 @@ AllowPasteToAdd: {
   type: Boolean | String,
   default: true
 },
+// 隐藏标签输入框
+HideInput: {
+  type: Boolean | String,
+  default: false
+},
+// 隐藏删除按钮（标签右侧的 x）
+HideDelete: {
+  type: Boolean | String,
+  default: false
+},
 
 /* Styles */
 // 标签输入框中输入超过设定值数量的字符，输入字体颜色将改变
