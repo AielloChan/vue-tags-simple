@@ -65,7 +65,7 @@ export default {
       default: '请输入标签名'
     },
     // 在输入框中自动补全，会多消耗一丢丢性能
-    AutoComplite: {
+    AutoComplete: {
       type: Boolean | String,
       default: false
     },
@@ -233,7 +233,7 @@ export default {
       }
     },
     onKeydownTab() {
-      if (this.AutoComplite) {
+      if (this.AutoComplete) {
         // 避免在没有匹配项的情况下替换当前输入
         if (this.proposedTagId === null) return;
 
@@ -316,7 +316,7 @@ export default {
       }
     },
     inputPropose() {
-      if (this.AutoComplite) {
+      if (this.AutoComplete) {
         let val = this.inputVal,
           matchedTagId = null; // 模糊匹配到的已有标签 id
         // 无任何输入的情况下不进行建议

@@ -9,7 +9,7 @@
         @before-add-tag="beforeAddTag"
         @after-add-tag="afterAddTag"
         @after-click-tag="afterClickTag"
-        AutoComplite="true"></Tags>
+        AutoComplete="true"></Tags>
     </div>
     <div class="container info">
       <h3>食用指导</h3>

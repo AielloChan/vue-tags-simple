@@ -93,7 +93,7 @@ Placeholder: {
   default: '请输入标签名'
 },
 // 在输入框中自动补全，会多消耗一丢丢性能
-AutoComplite: {
+AutoComplete: {
   type: Boolean | String,
   default: false
 },
