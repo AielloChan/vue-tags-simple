@@ -8,6 +8,7 @@
         :UsedTagIds="usedTagIds"
         @before-add-tag="beforeAddTag"
         @after-add-tag="afterAddTag"
+        @after-click-tag="afterClickTag"
         AutoComplite="true"></Tags>
     </div>
     <div class="container info">
@@ -79,6 +80,9 @@ export default {
     },
     afterAddTag(data, id, name) {
       console.log(`成功添加 ${name}，当前使用的标签有 ${data.usedTagIds.join(',')}`);
+    },
+    afterClickTag(data, id) {
+      console.log(`ID 为 ${id} 的标签被点击`);
     }
   }
 }

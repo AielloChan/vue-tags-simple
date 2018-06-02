@@ -140,4 +140,6 @@ WarningLength: {
 @before-update-tag-name
 // 在更新标签后调用。返回：标准数据、已被修改的标签 ID、新标签名
 @after-update-tag-name
+// 标签被点击后调用。返回：标准数据、当前标签 ID
+@after-click-tag
 ```

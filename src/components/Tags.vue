@@ -4,6 +4,7 @@
       <div v-for="tagId in usedTagIds"
         :key="tagId"
         :class="{active:hlTagId==tagId}"
+        @click.stop="onClickTag(tagId)"
         class="used-tag">
         <span>{{getTagNameById(tagId)}}</span>
         <span @click="delTag(tagId)"
@@ -232,6 +233,9 @@ export default {
 
         this.inputVal = this.proposedTagName;
       }
+    },
+    onClickTag(tagId) {
+      this.$emit('after-click-tag', this.cbParam, tagId);
     },
 
     /* 
