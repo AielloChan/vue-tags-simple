@@ -12,7 +12,7 @@
           class="used-tag-remove">✕</span>
       </div>
       <span class="new-tag-wapper"
-        :style="{width:(getBLen(Placeholder)/2 || 7)+'em'}">
+        :style="{width:(getBLen(Placeholder)/2+0.5 || 7)+'em'}">
         <span v-if="!HideInput"
           class="new-tag-item new-tag-propose">{{proposal}}</span>
         <input v-if="!HideInput"
@@ -331,7 +331,8 @@ export default {
       return this.globalNextId++;
     },
     getTagNameById(id) {
-      return this.allTags[id].name;
+      let tag = this.allTags[id];
+      return tag ? tag.name : null;
     },
     // isAbsLike 表示绝对模糊匹配，匹配的只能相似，不能相同
     // 成功返回 id Number，失败返回 null
