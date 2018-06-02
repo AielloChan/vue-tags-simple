@@ -6,9 +6,9 @@
     <div class="container vue-tags">
       <Tags :AllTags="allTags"
         :UsedTagIds="usedTagIds"
-        :BeforeAddTag="beforeAddTag"
-        :AfterAddTag="afterAddTag"
-        AutoComplite='true'></Tags>
+        @before-add-tag="beforeAddTag"
+        @after-add-tag="afterAddTag"
+        AutoComplite></Tags>
     </div>
     <div class="container info">
       <h3>食用指导</h3>

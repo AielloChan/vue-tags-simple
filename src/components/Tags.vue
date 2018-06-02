@@ -70,57 +70,6 @@ export default {
       default: true
     },
 
-    /* Events */
-    /* 
-    * 所有钩子函数都会收到一个对象作为参数 
-    * 
-    * {
-    *   allTags:{}
-    *   usedTagIds:[]
-    *   globalNextId:10
-    * }
-    */
-    // 在添加标签前调用。返回：标准数据、新被加入标签的 ID、将被加入的标签名
-    BeforeAddTag: {
-      type: Function,
-      default: function () { }
-    },
-    // 在添加标签后调用。返回：标准数据、新被加入标签的 ID
-    AfterAddTag: {
-      type: Function,
-      default: function () { }
-    },
-    // 在使用标签前调用。返回：标准数据、将被使用的标签 ID
-    BeforeUseTag: {
-      type: Function,
-      default: function () { }
-    },
-    // 在使用标签后调用。返回：标准数据、已被使用的标签 ID
-    AfterUseTag: {
-      type: Function,
-      default: function () { }
-    },
-    // 在删除标签前调用。返回：标准数据、将被删除的标签 ID
-    BeforeDeleteTag: {
-      type: Function,
-      default: function () { }
-    },
-    // 在删除标签后调用。返回：标准数据
-    AfterDeleteTag: {
-      type: Function,
-      default: function () { }
-    },
-    // 在更新标签前调用。返回：标准数据、将被修改的标签 ID、新标签名
-    BeforeUpdateTagName: {
-      type: Function,
-      default: function () { }
-    },
-    // 在更新标签后调用。返回：标准数据、已被修改的标签 ID、新标签名
-    AfterUpdateTagName: {
-      type: Function,
-      default: function () { }
-    },
-
     /* Styles */
     // 标签输入框中输入超过设定值数量的字符，输入字体颜色将改变
     WarningLength: {
@@ -295,10 +244,10 @@ export default {
           name: name
         }),
           newTagId = this.getNextId();
-        this.BeforeAddTag(this.cbParam, newTagId, name);
+        this.$emit('before-add-tag', this.cbParam, newTagId, name);
         // 添加到标签列表中
         this.allTags[newTagId] = newTag;
-        this.AfterAddTag(this.cbParam, newTagId, name);
+        this.$emit('after-add-tag', this.cbParam, newTagId, name);
         this.useTag(newTagId);
       } else if (this.usedTagIds.indexOf(existedTagId) === -1) {
         // 已经存在此名字的标签，但是当前并没有使用
@@ -321,24 +270,24 @@ export default {
       return true;
     },
     useTag(id) {
-      this.BeforeUseTag(this.cbParam, id);
+      this.$emit('before-use-tag', this.cbParam, id);
       // 直接添加到当前使用列表中
       this.usedTagIds.push(id);
-      this.AfterUseTag(this.cbParam, id);
+      this.$emit('after-use-tag', this.cbParam, id);
     },
     // 移除指定标签
     delTag(id) {
-      this.BeforeDeleteTag(this.cbParam, id);
+      this.$emit('before-delete-tag', this.cbParam, id);
       this.usedTagIds = this.rmMatch(this.usedTagIds, _id => _id !== id);
-      this.AfterDeleteTag(this.cbParam, id);
+      this.$emit('after-delete-tag', this.cbParam, id);
     },
     // 从使用中的标签里移除最后一个
     delLastTag() {
       let usedTagIds = this.usedTagIds,
         tobeRemovedTagId = usedTagIds[usedTagIds.length - 1];
-      this.BeforeDeleteTag(this.cbParam, tobeRemovedTagId);
+      this.$emit('before-delete-tag', this.cbParam, tobeRemovedTagId);
       this.usedTagIds = this.rmLast(this.usedTagIds);
-      this.AfterDeleteTag(this.cbParam, tobeRemovedTagId);
+      this.$emit('after-delete-tag', this.cbParam, tobeRemovedTagId);
     },
     inputWarning() {
       // 输入超过指定长度给予提醒
@@ -414,9 +363,9 @@ export default {
     setTagNameById(id, name) {
       if (this.allTags[id] && name.length > 0) {
         // 更新钩子
-        this.BeforeUpdateTagName(this.cbParam, id, name);
+        this.$emit('before-update-tag-name', this.cbParam, id, name);
         this.allTags[id].name = name;
-        this.AfterUpdateTagName(this.cbParam, id, name);
+        this.$emit('after-update-tag-name', this.cbParam, id, name);
         return true;
       }
       return false;
