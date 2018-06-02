@@ -247,8 +247,8 @@ export default {
         this.$emit('before-add-tag', this.cbParam, newTagId, name);
         // 添加到标签列表中
         this.allTags[newTagId] = newTag;
-        this.$emit('after-add-tag', this.cbParam, newTagId, name);
         this.useTag(newTagId);
+        this.$emit('after-add-tag', this.cbParam, newTagId, name);
       } else if (this.usedTagIds.indexOf(existedTagId) === -1) {
         // 已经存在此名字的标签，但是当前并没有使用
         // 使用该标签
