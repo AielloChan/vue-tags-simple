@@ -9,7 +9,8 @@
         <span @click="delTag(tagId)"
           class="used-tag-remove">✕</span>
       </div>
-      <span class="new-tag-wapper">
+      <span class="new-tag-wapper"
+        :style="{width:(getBLen(Placeholder)/2 || 7)+'em'}">
         <span v-if="!HideInput"
           class="new-tag-item new-tag-propose">{{proposal}}</span>
         <input v-if="!HideInput"
@@ -425,6 +426,14 @@ export default {
         rnd += Math.floor(Math.random() * 10);
       return rnd;
     },
+    // 获得字符串长度，英文一个字符，中文两个字符
+    getBLen(s) {
+      if (s === null || s == undefined) return 0;
+      if (typeof s !== "string") {
+        s += "";
+      }
+      return s.replace(/[^\x00-\xff]/g, "01").length;
+    },
   },
   watch: {
     inputVal(val) {
@@ -453,8 +462,6 @@ $fs-sm: 0.6rem;
 $fs-s: 0.8rem;
 $fs-m: 1rem;
 
-$input-width: 7rem;
-
 .vue-tags-container {
   display: flex;
   box-sizing: border-box;
@@ -468,6 +475,7 @@ $input-width: 7rem;
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
+  overflow: hidden;
 }
 .used-tag {
   margin: 2px;
@@ -480,6 +488,7 @@ $input-width: 7rem;
   color: $c-light;
   font-size: $fs-m;
   flex: 1;
+  white-space: nowrap;
   &.active {
     animation: blink 0.4s linear infinite alternate;
   }
@@ -489,7 +498,6 @@ $input-width: 7rem;
   flex-grow: 20;
   margin: 0;
   padding: 0;
-  width: $input-width;
 }
 .new-tag-item {
   box-sizing: border-box;
