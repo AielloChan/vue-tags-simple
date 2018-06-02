@@ -523,13 +523,14 @@ $input-width: 7rem;
   border-radius: 3px;
   color: $c-light;
   font-size: $fs-m;
+  flex: 1;
   &.active {
     animation: blink 0.4s linear infinite alternate;
   }
 }
 .new-tag-wapper {
   position: relative;
-  flex-grow: 1;
+  flex-grow: 20;
   margin: 0;
   padding: 0;
   width: $input-width;
