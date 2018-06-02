@@ -8,7 +8,7 @@
         class="used-tag">
         <span>{{getTagNameById(tagId)}}</span>
         <span v-if="!HideDelete"
-          @click="delTag(tagId)"
+          @click.stop="delTag(tagId)"
           class="used-tag-remove">✕</span>
       </div>
       <span class="new-tag-wapper"
