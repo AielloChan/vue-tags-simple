@@ -10,8 +10,10 @@
           class="used-tag-remove">✕</span>
       </div>
       <span class="new-tag-wapper">
-        <span class="new-tag-item new-tag-propose">{{proposal}}</span>
-        <input v-model="inputVal"
+        <span v-if="!HideInput"
+          class="new-tag-item new-tag-propose">{{proposal}}</span>
+        <input v-if="!HideInput"
+          v-model="inputVal"
           :placeholder="Placeholder"
           :class="{'no-select':proposedTagId!==null,warning:showInputWarning}"
           @dblclick.prevent="onKeydownTab"
@@ -68,6 +70,11 @@ export default {
     AllowPasteToAdd: {
       type: Boolean | String,
       default: true
+    },
+    // 隐藏标签输入框
+    HideInput: {
+      type: Boolean | String,
+      default: false
     },
 
     /* Styles */
