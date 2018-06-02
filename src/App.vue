@@ -9,6 +9,7 @@
         @before-add-tag="beforeAddTag"
         @after-add-tag="afterAddTag"
         @after-click-tag="afterClickTag"
+        @after-change-used-tag="afterChangeUsedTag"
         AutoComplete="true"></Tags>
     </div>
     <div class="container info">
@@ -83,6 +84,9 @@ export default {
     },
     afterClickTag(data, id) {
       console.log(`ID 为 ${id} 的标签被点击`);
+    },
+    afterChangeUsedTag(data, id) {
+      console.log(`ID 为 ${id} 的标签被使用或者移除`);
     }
   }
 }

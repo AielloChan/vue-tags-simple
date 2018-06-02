@@ -289,23 +289,29 @@ export default {
     },
     useTag(id) {
       this.$emit('before-use-tag', this.cbParam, id);
+      this.$emit('before-change-used-tag', this.cbParam, id);
       // 直接添加到当前使用列表中
       this.usedTagIds.push(id);
       this.$emit('after-use-tag', this.cbParam, id);
+      this.$emit('after-change-used-tag', this.cbParam, id);
     },
     // 移除指定标签
     delTag(id) {
       this.$emit('before-delete-tag', this.cbParam, id);
+      this.$emit('before-change-used-tag', this.cbParam, id);
       this.usedTagIds = this.rmMatch(this.usedTagIds, _id => _id !== id);
       this.$emit('after-delete-tag', this.cbParam, id);
+      this.$emit('after-change-used-tag', this.cbParam, id);
     },
     // 从使用中的标签里移除最后一个
     delLastTag() {
       let usedTagIds = this.usedTagIds,
         tobeRemovedTagId = usedTagIds[usedTagIds.length - 1];
       this.$emit('before-delete-tag', this.cbParam, tobeRemovedTagId);
+      this.$emit('before-change-used-tag', this.cbParam, id);
       this.usedTagIds = this.rmLast(this.usedTagIds);
       this.$emit('after-delete-tag', this.cbParam, tobeRemovedTagId);
+      this.$emit('after-change-used-tag', this.cbParam, id);
     },
     inputWarning() {
       // 输入超过指定长度给予提醒
@@ -456,7 +462,7 @@ export default {
       if (val[0] === ' ') {
         this.inputVal = this.triml(this.inputVal);
       }
-    }
+    },
   }
 }
 </script>

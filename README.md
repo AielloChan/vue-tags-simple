@@ -146,6 +146,10 @@ WarningLength: {
 @before-delete-tag
 // 在删除标签后调用。返回：标准数据
 @after-delete-tag
+// 在标签列表改变前调用。返回：标准数据、将被修改的标签 ID、新标签名
+@before-change-used-tag
+// 在标签列表改变后调用。返回：标准数据、已被修改的标签 ID、新标签名
+@after-change-used-tag
 // 在更新标签前调用。返回：标准数据、将被修改的标签 ID、新标签名
 @before-update-tag-name
 // 在更新标签后调用。返回：标准数据、已被修改的标签 ID、新标签名
